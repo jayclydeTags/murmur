@@ -1,4 +1,5 @@
 import type { Auth } from '@/types/auth';
+import type { SidebarConversation } from '@/types/chat';
 
 declare module 'react' {
     interface InputHTMLAttributes<T> {
@@ -12,6 +13,8 @@ declare module '@inertiajs/core' {
             name: string;
             auth: Auth;
             sidebarOpen: boolean;
+            sidebar: SidebarConversation[];
+            unreadNotificationCount: number;
             [key: string]: unknown;
         };
     }
