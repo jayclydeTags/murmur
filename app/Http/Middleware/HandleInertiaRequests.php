@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Resources\ConversationResource;
+use App\Models\Conversation;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -41,6 +43,10 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            'sidebar' => fn (): array => $request->user()
+                ? ConversationResource::collection(Conversation::sidebarFor($request->user()))->resolve($request)
+                : [],
+            'unreadNotificationCount' => fn (): int => $request->user()?->unreadNotifications()->count() ?? 0,
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
         ];
     }

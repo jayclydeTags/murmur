@@ -11,7 +11,10 @@ export default function AppSidebarLayout({
     return (
         <AppShell variant="sidebar">
             <AppSidebar />
-            <AppContent variant="sidebar" className="min-w-0 overflow-x-clip">
+            <AppContent
+                variant="sidebar"
+                className="h-svh min-h-0 min-w-0 overflow-x-clip overflow-y-auto md:peer-data-[variant=inset]:h-[calc(100svh-(--spacing(4)))] md:peer-data-[variant=inset]:min-h-0"
+            >
                 <AppSidebarHeader breadcrumbs={breadcrumbs} />
                 {children}
             </AppContent>
